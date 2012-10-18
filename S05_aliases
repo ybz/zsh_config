@@ -19,3 +19,6 @@ if isexe youtube-dl; then
 fi
 
 alias isinternet='ping 8.8.8.8'
+if which mvim > /dev/null; then
+    alias mtvim='mvim --remote-tab-silent'
+fi
