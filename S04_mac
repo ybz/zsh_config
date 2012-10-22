@@ -28,6 +28,9 @@ if [[ $(uname) == "Darwin" ]]; then
     # python that comes from brew
     #export PATH=/usr/local/share/python:$PATH
 
+    # global npm modules
+    export PATH=/usr/local/share/npm/bin:$PATH
+
     alias top='top -o cpu'
     alias ls='ls -G'
 
