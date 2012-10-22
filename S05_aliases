@@ -1,3 +1,5 @@
+yygit=/Users/cizei/Oditions/yygit
+
 if (ls --version | grep 'GNU coreutils') >/dev/null 2>&1; then
     alias ls='ls --color=auto'
 fi
