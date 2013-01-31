@@ -24,3 +24,7 @@ alias isinternet='ping 8.8.8.8'
 if which mvim > /dev/null; then
     alias mtvim='mvim --remote-tab-silent'
 fi
+
+if which gvim > /dev/null; then
+    alias gtvim='gvim --remote-tab-silent'
+fi
