@@ -7,7 +7,11 @@ function virtualenv_name() {
     if echo "$virtualenv" | grep .venv > /dev/null; then
         basename $(dirname "$virtualenv")
     else
-        basename "$virtualenv"
+        if echo "$virtualenv" | grep env > /dev/null; then
+            basename $(dirname "$virtualenv")
+        else
+            basename "$virtualenv"
+        fi
     fi
 }
 
@@ -26,8 +30,11 @@ function enclosing_virtualenv() {
     fi
     local virtualenv="$(walkup bin/activate .venv/bin/activate | cut -f1 -d:)"
     if [ -z "$virtualenv" ]; then
-        # not in a virtualenv
-        return
+        local virtualenv="$(walkup bin/activate env/bin/activate | cut -f1 -d:)"
+        if [ -z "$virtualenv" ]; then
+            # not in a virtualenv
+            return
+        fi
     fi
 
     virtualenv_name "$virtualenv"
@@ -52,8 +59,11 @@ function act() {
     else
         local virtualenv="$(walkup bin/activate .venv/bin/activate | tr : /)"
         if [ -z "$virtualenv" ]; then
-            echo "act: not in a virtualenv"
-            return 1
+            local virtualenv="$(walkup bin/activate env/bin/activate | tr : /)"
+            if [ -z "$virtualenv" ]; then
+                echo "act: not in a virtualenv"
+                return 1
+            fi
         fi
         source "$virtualenv"
     fi
